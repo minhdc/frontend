@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class WordForm extends Component{
     constructor(props){
@@ -15,21 +16,37 @@ class WordForm extends Component{
     handleInput(event){
         const target = event.target;
         const name = target.name;
-        const value = target.type === 'text' ? target.value : null;
-        this.setState({
-            [name] : target.value
+        if (name !== "img"){
+            this.setState({
+                [name] : target.value
+                });
+        }else{
+            this.setState({
+                ["img"] : target.value
             });
+        }
     }
 
-    handleSubmit(event){
-        alert(this.state.word + this.state.definition + this.state.pic_url);
-        alert('selected file: - '+this.fileInput.current.files[0].name);
-        event.preventDefault();
+    handleSubmit(event){        
+        //event.preventDefault();
+        const word = {
+            word: this.state.word,
+            definition: this.state.definition
+        };
+        axios({
+            method: "POST",
+            url: "http://127.0.0.1:8000/pvoexample/api/v1/words",
+            data: word
+        }).then((res) => {
+            console.log(res)
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     render(){
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form>
                 <label htmlFor="">
                     Word:
                     <input name="word" type="text" value={this.state.word} onInput = {this.handleInput} />
@@ -42,7 +59,7 @@ class WordForm extends Component{
                     IMG:
                     <input name="img" type="file" ref={this.fileInput} />
                 </label>
-                <input type="submit" value="Submit"/>
+                <button type="button" value="Submit" onClick={this.handleSubmit}>Submit</button>
             </form>
         );
     }

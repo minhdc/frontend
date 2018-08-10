@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import WordForm from './Form.js';
+//import WordForm from './Form.js';
+import WordList from './WordList.js';
+import WordForm from './WordForm.js';
 
 class App extends Component {
   render() {
@@ -13,9 +15,15 @@ class App extends Component {
         </header>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <WordForm/>
-      </div>      
+        </p>  
+        <div className="WordForm">
+          <WordForm/>
+          </div>     
+        <div className="WordList">
+          <WordList/>
+        </div> 
+      </div>
+            
     );
   }
 }

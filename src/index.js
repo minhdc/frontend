@@ -2,11 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import WordForm from './Form.js';
 import registerServiceWorker from './registerServiceWorker';
 
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<WordForm />, document.getElementById('root'));
+//ReactDOM.render(<WordForm />, document.getElementById('root'));
+//ReactDOM.render(<Word />,document.getElementById('root'));
 registerServiceWorker();
