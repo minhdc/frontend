@@ -1,52 +1,98 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {Form,FormGroup,Col,
+    Checkbox,Button,ControlLabel,
+    FormControl,HelpBlock} from 'react-bootstrap';
 
-class WordForm extends Component{
+
+    class WordForm extends Component{
     constructor(props){
         super(props);
         this.state = {
             word: '',
             definition: '',
+            pic: '',
         }
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.fileInput = React.createRef();
+       // this.handleImage = this.handleImage.bind(this);
+       // this.fileInput = React.createRef();
     }
 
-    handleInput(event){
-        const target = event.target;
-        const name = target.name;
-        if (name !== "img"){
-            this.setState({
-                [name] : target.value
-                });
-        }else{
-            this.setState({
-                ["img"] : target.value
-            });
-        }
+    handleInput(event){       
+        this.setState({
+            pic : event.target.files[0]
+        });    
+        console.log(this.state.pic)   ;
     }
+    
 
     handleSubmit(event){        
         //event.preventDefault();
-        const word = {
-            word: this.state.word,
-            definition: this.state.definition
-        };
+        const word = new FormData();
+        word.append('word',this.state.word);
+        word.append('definition',this.state.definition);
+        word.append('pic',this.state.pic);
+        
         axios({
             method: "POST",
             url: "http://127.0.0.1:8000/pvoexample/api/v1/words",
-            data: word
+            data: word,  
+            //headers: {
+            //    'Content-Type' : 'multipart/form-data'
+            //}                     
         }).then((res) => {
-            console.log(res)
+            console.log(res);
+            
         }).catch(err => {
             console.log(err);
         })
     }
 
     render(){
-        return(
+
+        const bindInput = statePath => ({
+            value: this.state[statePath],
+            onChange: (e) => this.setState({
+                [statePath]: e.target.value
+            })
+        });
+
+
+        return(  
+            <form >
+                <FormGroup controlId="wordForm">                    
+                    <FormControl
+                        name='word'
+                        type='text'                        
+                        placeholder='Enter text'
+                        {...bindInput('word')}
+                        label="Word"
+                    />                    
+                </FormGroup>
+                <FormGroup>                    
+                    <FormControl
+                        name='definition'
+                        type='text'
+                        placeholder='Enter text'
+                        {...bindInput('definition')}
+                        label="Definition"
+                    />                    
+                </FormGroup>
+                <FormGroup>                    
+                    <FormControl
+                        name='img'
+                        type='file'                        
+                        accept=".jpeg,.bpm,.gif,.jpg"
+                        onChange = {this.handleInput}
+                        label="File"
+                    />                    
+                </FormGroup>
+                <Button type="button" value="Submit" onClick={this.handleSubmit}>Submit</Button>
+            </form>
+            /*          
             <form>
+                
                 <label htmlFor="">
                     Word:
                     <input name="word" type="text" value={this.state.word} onInput = {this.handleInput} />
@@ -61,6 +107,7 @@ class WordForm extends Component{
                 </label>
                 <button type="button" value="Submit" onClick={this.handleSubmit}>Submit</button>
             </form>
+            */
         );
     }
 }
