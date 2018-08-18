@@ -37,10 +37,7 @@ import {Form,FormGroup,Col,
         axios({
             method: "POST",
             url: "http://127.0.0.1:8000/pvoexample/api/v1/words",
-            data: word,  
-            //headers: {
-            //    'Content-Type' : 'multipart/form-data'
-            //}                     
+            data: word,                            
         }).then((res) => {
             console.log(res);
             
