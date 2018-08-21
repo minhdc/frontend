@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {Form,FormGroup,Col,
     Checkbox,Button,ControlLabel,
-    FormControl,HelpBlock,ListGroup,ListGroupItem} from 'react-bootstrap';
+    FormControl,HelpBlock,ListGroup,ListGroupItem,
+    Grid,Row,ButtonToolbar,ButtonToolbarProps,
+    SplitButton,MenuItem} from 'react-bootstrap';
 
 
     class WordRelationForm extends Component{
@@ -23,30 +25,43 @@ import {Form,FormGroup,Col,
     
 
     handleSubmit(event){        
+        
+    }
+
+    componentDidMount(){
 
     }
 
     render(){
-
-        const bindInput = statePath => ({
-            value: this.state[statePath],
-            onChange: (e) => this.setState({
-                [statePath]: e.target.value
-            })
-        });
-
-
         return(
-            <form>
-                <FormGroup>
-                    <ListGroup>
-                        <ListGroupItem></ListGroupItem>
+            <Grid>
+                <Row className="show-grid">
+                    <Col xs={4} md={4} lg = {4}>
+                    <ListGroup id="left-wordlist">                        
                     </ListGroup>
-                </FormGroup>
-            </form>
+                    </Col>
+                    <Col xs={4} md={4} lg = {4}>
+                    <ButtonToolbar>
+                        <SplitButton title="wordRelation" drop up id="word-relation-dropup">
+                            <MenuItem eventKey="1">General Association</MenuItem>
+                            <MenuItem eventKey="2">Of the same concept cluster</MenuItem>
+                            <MenuItem eventKey="3">A Part Of </MenuItem>
+                            <MenuItem eventKey="4">A Type Of</MenuItem>
+                            <MenuItem eventKey="5">Describing</MenuItem>
+                            <MenuItem eventKey="6">Undefined</MenuItem>
+                        </SplitButton>
+                    </ButtonToolbar>
+                    <Button type="button" onClick={this.handleSubmit}>Save</Button>
+                    </Col>
+                    <Col xs={4} md={4} lg = {4}>
+                    <ListGroup id="right-wordlist">
+                    </ListGroup>
+                    </Col>
+                </Row>
+            </Grid>
         );
             
     }
 }
 
-export default WordForm;
+export default WordRelationForm;

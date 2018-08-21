@@ -4,6 +4,14 @@ import './App.css';
 //import WordForm from './Form.js';
 import WordList from './WordList.js';
 import WordForm from './WordForm.js';
+import WordRelationList from './WordRelationList.js';
+
+import {
+  BrowserRouter,HashRouter,MemoryRouter,StaticRouter,
+  Route,
+  Link
+} from 'react-router-dom';
+
 
 import {Modal} from 'react-bootstrap';
 
@@ -33,6 +41,17 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>  
+
+        <HashRouter>
+          <div>
+            <ul>
+              <li>
+                <Link to="/wordrelation">WordRela</Link>
+              </li>
+            </ul>
+            <Route path="/wordrelation" component = {WordRelationList}></Route>
+          </div>
+        </HashRouter>
 
         <button onClick={this.toggleWordForm}> WordForm
           </button>
