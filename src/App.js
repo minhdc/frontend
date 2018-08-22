@@ -5,27 +5,30 @@ import './App.css';
 import WordList from './WordList.js';
 import WordForm from './WordForm.js';
 import WordRelationList from './WordRelationList.js';
-
+import NavBar from './NavBar.js';
 import {
-  BrowserRouter,HashRouter,MemoryRouter,StaticRouter,
+  Grid, Row, Col
+} from 'react-bootstrap';
+import {
+  BrowserRouter, HashRouter, MemoryRouter, StaticRouter,
   Route,
   Link
 } from 'react-router-dom';
 
 
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 class App extends Component {
 
-  constructor(props,context){
-    super(props,context);
-    this.state={
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
       showWordForm: false
     };
     this.toggleWordForm = this.toggleWordForm.bind(this);
   }
 
-  toggleWordForm(){
+  toggleWordForm() {
     this.setState({
       showWordForm: !this.state.showWordForm
     });
@@ -34,45 +37,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>  
 
-        <HashRouter>
-          <div>
-            <ul>
-              <li>
-                <Link to="/wordrelation">WordRela</Link>
-              </li>
-            </ul>
-            <Route path="/wordrelation" component = {WordRelationList}></Route>
-          </div>
-        </HashRouter>
-
-        <button onClick={this.toggleWordForm}> WordForm
-          </button>
-        <div className="static-modal">
-        <Modal show={this.state.showWordForm} onHide={this.toggleWordForm}>
-          <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <div className="WordForm">
-              <WordForm/>
-            </div>    
-          </Modal.Body> 
-        </Modal>
-        </div>
-        
-        <div className="WordList">
-          <WordList/>
-        </div> 
+        <NavBar />
+        <Grid>          
+          <Row className="show-grid" >
+            <Col xs={6} md={6}>
+              <div className="WordList">
+                <WordList />
+              </div>
+            </Col>
+          </Row>
+          <Row className="show-grid">
+            <Col xs={6} md={6}>
+              <div className="wordForm">
+                <WordForm />
+              </div>
+            </Col>
+          </Row>
+        </Grid>
       </div>
-            
+
     );
   }
 }
