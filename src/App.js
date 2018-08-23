@@ -38,23 +38,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <NavBar />
-        <Grid>          
-          <Row className="show-grid" >
-            <Col xs={6} md={6}>
-              <div className="WordList">
-                <WordList />
-              </div>
-            </Col>
-          </Row>
-          <Row className="show-grid">
-            <Col xs={6} md={6}>
-              <div className="wordForm">
-                <WordForm />
-              </div>
-            </Col>
-          </Row>
-        </Grid>
+        <NavBar />        
       </div>
 
     );

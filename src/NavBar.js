@@ -11,7 +11,7 @@ class NavBar extends Component {
             <Navbar inverse>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="#">PVO</a>
+                        <a href="/">PVO</a>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>

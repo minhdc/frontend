@@ -7,6 +7,7 @@ import {
     Grid, Row, ButtonToolbar, ButtonToolbarProps,
     SplitButton, MenuItem
 } from 'react-bootstrap';
+import App from './App';
 
 
 class WordRelationList extends Component {
@@ -41,6 +42,7 @@ class WordRelationList extends Component {
 
     render() {
         return (
+            <div>            
             <Grid>
                 <Row className="show-grid">
                     <Col xs={4} md={4} lg={4}>
@@ -80,6 +82,7 @@ class WordRelationList extends Component {
                     </Col>
                 </Row>
             </Grid>
+            </div>
         );
 
     }

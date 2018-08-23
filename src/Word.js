@@ -1,15 +1,13 @@
 import React , {Component} from 'react';
 import axios from 'axios';
+import WordForm from './WordForm';
+import WordList from './WordList';
 
 
 class Word extends Component{
     constructor(props){
         super(props);
-        this.state = {
-            word: '',
-            definition: "",
-            pic_url:"",            
-        }
+        
     }
 
     
@@ -17,17 +15,12 @@ class Word extends Component{
     render(){
         return(
             <div>
-            <h1>
-                {this.state.word}
-            </h1>
-            <h2>
-                {this.state.definition}
-            </h2>
-            <h3>
-                {this.state.pic_url}
-            </h3>
+            <WordForm></WordForm>
+            <WordList></WordList>
             </div>
         );
     }
 
 }
+
+export default Word;

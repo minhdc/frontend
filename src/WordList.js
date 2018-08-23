@@ -6,6 +6,7 @@ import {
     Modal
 } from 'react-bootstrap';
 import UpdateForm from './UpdateForm';
+import App from './App';
 //axios.defaults.withCredentials = true;
 
 
@@ -95,7 +96,7 @@ class WordList extends Component {
 
     render() {
         return (
-            <div>
+            <div>                
                 <button onClick={this.toggleWordList}> WordList
           </button>
                 <div className="static-modal">
