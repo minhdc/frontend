@@ -7,7 +7,7 @@ import {
     Grid, Row, ButtonToolbar, ButtonToolbarProps,
     SplitButton, MenuItem
 } from 'react-bootstrap';
-import App from './App';
+
 
 
 class WordRelationList extends Component {

@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-//import WordForm from './Form.js';
-import WordList from './WordList.js';
-import WordForm from './WordForm.js';
-import WordRelationList from './WordRelationList.js';
-import NavBar from './NavBar.js';
+import WelcomePage from 'general/WelcomePage';
 import {
   Grid, Row, Col
 } from 'react-bootstrap';
@@ -16,7 +12,6 @@ import {
 } from 'react-router-dom';
 
 
-import { Modal } from 'react-bootstrap';
 
 class App extends Component {
 
@@ -37,8 +32,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-        <NavBar />        
+        <WelcomePage />        
       </div>
 
     );

@@ -1,7 +1,8 @@
 import React , {Component} from 'react';
 import axios from 'axios';
-import WordForm from './WordForm';
-import WordList from './WordList';
+import WordForm from 'word/WordForm';
+import WordList from 'word/WordList';
+import NavBar from 'general/NavBar';
 
 
 class Word extends Component{
@@ -15,6 +16,7 @@ class Word extends Component{
     render(){
         return(
             <div>
+            <NavBar/>
             <WordForm></WordForm>
             <WordList></WordList>
             </div>

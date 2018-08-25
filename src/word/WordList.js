@@ -5,8 +5,7 @@ import {
     Col, Grid, Row, FormGroup, FormControl, Button,
     Modal
 } from 'react-bootstrap';
-import UpdateForm from './UpdateForm';
-import App from './App';
+import UpdateForm from 'word/UpdateForm.js';
 //axios.defaults.withCredentials = true;
 
 
