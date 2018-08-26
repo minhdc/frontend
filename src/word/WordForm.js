@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
-    Form, FormGroup, Col, Modal,
-    Checkbox, Button, ControlLabel,
-    FormControl, HelpBlock
+    FormGroup, Modal,
+    Button, FormControl
 } from 'react-bootstrap';
 
 
@@ -47,6 +46,11 @@ class WordForm extends Component {
 
         }).catch(err => {
             console.log(err);
+        })
+        this.setState({
+            word:'',
+            definition: '',
+            pic: ''
         })
         this.toggleWordForm();
     }

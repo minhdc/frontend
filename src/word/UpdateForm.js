@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
-    Col, Grid, Row, FormGroup, FormControl, Button,
-    Modal
+    FormGroup, FormControl, Button,    
 } from 'react-bootstrap';
 
 class UpdateForm extends Component {

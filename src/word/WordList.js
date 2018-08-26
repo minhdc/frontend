@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import {
-    Col, Grid, Row, FormGroup, FormControl, Button,
+    Col, Grid, Row, Button,
     Modal
 } from 'react-bootstrap';
 import UpdateForm from 'word/UpdateForm.js';
