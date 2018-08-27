@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route } from 'react-router-dom';
 import WelcomePage from 'general/WelcomePage.js';
 import Word from 'word/Word.js';
-import WordExample from 'word-example/WordExample.js';
+import WordExampleWrapper from 'word-example/WordExampleWrapper.js';
 import ExampleSearch from './example-search/ExampleSearch';
 import VocabTree from './vocab-tree/VocabTree';
 
@@ -17,7 +17,7 @@ ReactDOM.render(
                 <WelcomePage/>
             )}/>
             <Route path="/words" component ={Word}/>
-            <Route path="/wordexample" component ={WordExample}/>
+            <Route path="/wordexample" component ={WordExampleWrapper}/>
             <Route path="/example" component ={ExampleSearch}/>            
             <Route path="/vocabtree" component ={VocabTree}/>
         </div>
