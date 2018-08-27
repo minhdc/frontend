@@ -47,8 +47,8 @@ class WordExample extends Component {
         this.getWordList();
     }
 
-    handleClickOnWord(e,isParent){
-        isParent ? this.setState({word_2:e.target.value}) : this.setState({word_1:e.target.value})        
+    handleClickOnWord(e, isParent) {
+        isParent ? this.setState({ word_2: e.target.value }) : this.setState({ word_1: e.target.value })
     }
 
     handleRelationChange(e) {
@@ -60,11 +60,11 @@ class WordExample extends Component {
     handleWordRelation(e) {
         //submit relation
 
-        const wordRelation = new FormData();        
+        const wordRelation = new FormData();
         wordRelation.append('word1', this.state.word_1);
         wordRelation.append('word2', this.state.word_2);
-        wordRelation.append('relation', this.word_relation);
-        console.log(wordRelation);
+        wordRelation.append('relation', this.state.word_relation);
+
         axios({
             method: "POST",
             url: "http://127.0.0.1:8000/pvoexample/api/v1/wordrelation",
@@ -87,72 +87,141 @@ class WordExample extends Component {
         return (
             <div>
                 <NavBar />
-                <Grid>
+                <div id="wordRelation">
+                    <Grid>
+                        <Row bsClass="col-centered">
+                            <Col xs={4} md={4} lg={4}>
+                                <Label bsStyle="success">Child Concept</Label>
+                            </Col>
+                            <Col xs={4} md={4} lg={4}>
+                                <Label> Concept - Concept Relation</Label>
+                            </Col>
+                            <Col xs={4} md={4} lg={4}>
+                                <Label bsStyle="danger">Parent Concept</Label>
+                            </Col>
+                        </Row>
 
-                    <Row bsClass="col-centered">
+                        <Row bsClass="col-centered">
+                            <Col xs={4} md={4} lg={4} >
+                                <ListGroup bsClass="custom-listgroup">
+                                    {this.state.wordlist.map(word => (
+                                        <div key={word.id}>
+                                            <ListGroupItem
+                                                onClick={(e, isParent) => this.handleClickOnWord(e, isParent = false)}
+                                                value={word.word}>
+                                                {word.word}
+                                            </ListGroupItem>
+                                        </div>
+                                    ))}
+                                </ListGroup>
+                            </Col>
+                            <Col xs={4} md={4} lg={4} >
+                                <Row>
+                                    <FormGroup controlId="wordRelationControlSelect">
+                                        <FormControl componentClass="select"
+                                            placeholder="choose a relationship"
+                                            onChange={this.handleRelationChange}>
+                                            <option value={6}>Undefined</option>
+                                            <option value={1}>General Association</option>
+                                            <option value={2}>Of the same concept cluster</option>
+                                            <option value={3}>A part of</option>
+                                            <option default value={4}>A type of</option>
+                                            <option value={5}>Describing</option>
+                                        </FormControl>
+                                    </FormGroup>
+                                </Row>
+                            </Col>
+                            <Col xs={4} md={4} lg={4} >
+                                <ListGroup bsClass="custom-listgroup">
+                                    {this.state.wordlist.map(word => (
+                                        <div key={word.id}>
+                                            <ListGroupItem
+                                                onClick={(e, isParent) => this.handleClickOnWord(e, isParent = true)}
+                                                value={word.word}>
+                                                {word.word}
+                                            </ListGroupItem>
+                                        </div>
+                                    ))}
+                                </ListGroup>
+                            </Col>
+                        </Row>
+                        <Col xs={4} md={4} lg={4}></Col>
                         <Col xs={4} md={4} lg={4}>
-                            <Label bsStyle="success">Child Concept</Label>
-                        </Col>
-                        <Col xs={4} md={4} lg={4}>
-                            <Label> Concept - Concept Relation</Label>
-                        </Col>
-                        <Col xs={4} md={4} lg={4}>
-                            <Label bsStyle="danger">Parent Concept</Label>
-                        </Col>
-                    </Row>
-
-                    <Row bsClass="col-centered">
-                        <Col xs={4} md={4} lg={4} >
-                            <ListGroup bsClass="custom-listgroup">
-                                {this.state.wordlist.map(word => (
-                                    <div key={word.id}>
-                                        <ListGroupItem 
-                                            onClick={(e,isParent) => this.handleClickOnWord(e,isParent=false)}
-                                            value={word.word}>
-                                            {word.word}
-                                        </ListGroupItem>
-                                    </div>
-                                ))}
-                            </ListGroup>
-                        </Col>
-                        <Col xs={4} md={4} lg={4} >
                             <Row>
-                                <FormGroup controlId="wordRelationControlSelect">
-                                    <FormControl componentClass="select"
-                                        placeholder="choose a relationship"
-                                        onChange={this.handleRelationChange}>
-                                        <option value={6}>Undefined</option>
-                                        <option value={1}>General Association</option>
-                                        <option value={2}>Of the same concept cluster</option>
-                                        <option value={3}>A part of</option>
-                                        <option default value={4}>A type of</option>
-                                        <option value={5}>Describing</option>
-                                    </FormControl>
-                                </FormGroup>
+                                <Button block type="button" bsStyle="success" onClick={this.handleWordRelation}>Set Relation</Button>
                             </Row>
                         </Col>
-                        <Col xs={4} md={4} lg={4} >
-                            <ListGroup bsClass="custom-listgroup">
-                                {this.state.wordlist.map(word => (
-                                    <div key={word.id}>
-                                        <ListGroupItem 
-                                            onClick={(e,isParent) => this.handleClickOnWord(e, isParent=true)}
-                                            value={word.word}>
-                                            {word.word}
-                                        </ListGroupItem>
-                                    </div>
-                                ))}
-                            </ListGroup>
-                        </Col>
-                    </Row>
-                    <Col xs={4} md={4} lg={4}></Col>
-                    <Col xs={4} md={4} lg={4}>
-                        <Row>
-                            <Button block type="button" bsStyle="success" onClick={this.handleWordRelation}>Set Relation</Button>
+                        <Col xs={4} md={4} lg={4}></Col>
+                    </Grid>
+                </div>
+
+                <div id="wordExampleRelation">
+                    <Grid>
+                        <Row bsClass="col-centered">
+                            <Col xs={4} md={4} lg={4}>
+                                <Label bsStyle="success">Child Concept</Label>
+                            </Col>
+                            <Col xs={4} md={4} lg={4}>
+                                <Label> Concept - Concept Relation</Label>
+                            </Col>
+                            <Col xs={4} md={4} lg={4}>
+                                <Label bsStyle="danger">Parent Concept</Label>
+                            </Col>
                         </Row>
-                    </Col>
-                    <Col xs={4} md={4} lg={4}></Col>
-                </Grid>
+
+                        <Row bsClass="col-centered">
+                            <Col xs={4} md={4} lg={4} >
+                                <ListGroup bsClass="custom-listgroup">
+                                    {this.state.wordlist.map(word => (
+                                        <div key={word.id}>
+                                            <ListGroupItem
+                                                onClick={(e, isParent) => this.handleClickOnWord(e, isParent = false)}
+                                                value={word.word}>
+                                                {word.word}
+                                            </ListGroupItem>
+                                        </div>
+                                    ))}
+                                </ListGroup>
+                            </Col>
+                            <Col xs={4} md={4} lg={4} >
+                                <Row>
+                                    <FormGroup controlId="wordRelationControlSelect">
+                                        <FormControl componentClass="select"
+                                            placeholder="choose a relationship"
+                                            onChange={this.handleRelationChange}>
+                                            <option value={6}>Undefined</option>
+                                            <option value={1}>General Association</option>
+                                            <option value={2}>Of the same concept cluster</option>
+                                            <option value={3}>A part of</option>
+                                            <option default value={4}>A type of</option>
+                                            <option value={5}>Describing</option>
+                                        </FormControl>
+                                    </FormGroup>
+                                </Row>
+                            </Col>
+                            <Col xs={4} md={4} lg={4} >
+                                <ListGroup bsClass="custom-listgroup">
+                                    {this.state.wordlist.map(word => (
+                                        <div key={word.id}>
+                                            <ListGroupItem
+                                                onClick={(e, isParent) => this.handleClickOnWord(e, isParent = true)}
+                                                value={word.word}>
+                                                {word.word}
+                                            </ListGroupItem>
+                                        </div>
+                                    ))}
+                                </ListGroup>
+                            </Col>
+                        </Row>
+                        <Col xs={4} md={4} lg={4}></Col>
+                        <Col xs={4} md={4} lg={4}>
+                            <Row>
+                                <Button block type="button" bsStyle="success" onClick={this.handleWordRelation}>Set Relation</Button>
+                            </Row>
+                        </Col>
+                        <Col xs={4} md={4} lg={4}></Col>
+                    </Grid>
+                </div>
             </div>
         );
     }
