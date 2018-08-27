@@ -159,29 +159,21 @@ class WordExample extends Component {
                     <Grid>
                         <Row bsClass="col-centered">
                             <Col xs={4} md={4} lg={4}>
-                                <Label bsStyle="success">Child Concept</Label>
+                                <Label bsStyle="success">Example</Label>
                             </Col>
                             <Col xs={4} md={4} lg={4}>
-                                <Label> Concept - Concept Relation</Label>
+                                <Label> Example - Concept Relation</Label>
                             </Col>
                             <Col xs={4} md={4} lg={4}>
-                                <Label bsStyle="danger">Parent Concept</Label>
+                                <Label bsStyle="danger">Linked Concept</Label>
                             </Col>
                         </Row>
 
                         <Row bsClass="col-centered">
                             <Col xs={4} md={4} lg={4} >
-                                <ListGroup bsClass="custom-listgroup">
-                                    {this.state.wordlist.map(word => (
-                                        <div key={word.id}>
-                                            <ListGroupItem
-                                                onClick={(e, isParent) => this.handleClickOnWord(e, isParent = false)}
-                                                value={word.word}>
-                                                {word.word}
-                                            </ListGroupItem>
-                                        </div>
-                                    ))}
-                                </ListGroup>
+                                <FormGroup controlId="formControlsTextarea">                                    
+                                    <FormControl componentClass="textarea" placeholder="Enter examples here" rows={12} />
+                                </FormGroup>
                             </Col>
                             <Col xs={4} md={4} lg={4} >
                                 <Row>
@@ -189,12 +181,18 @@ class WordExample extends Component {
                                         <FormControl componentClass="select"
                                             placeholder="choose a relationship"
                                             onChange={this.handleRelationChange}>
-                                            <option value={6}>Undefined</option>
-                                            <option value={1}>General Association</option>
-                                            <option value={2}>Of the same concept cluster</option>
-                                            <option value={3}>A part of</option>
-                                            <option default value={4}>A type of</option>
-                                            <option value={5}>Describing</option>
+                                            <option value={12}>Same concept & Subconcept</option>
+                                            <option value={2}>Related Concept</option>
+                                            <option value={3}>Doer of Action</option>
+                                            <option value={4}>Receiver Of Action</option>
+                                            <option value={5}>Action</option>
+                                            <option value={6}>Beging described by</option>
+                                            <option value={7}>Describing</option>
+                                            <option value={8}>Idioms & fixed expression</option>
+                                            <option value={9}>Related phrases</option>
+                                            <option value={10}>Pun/word play</option>
+                                            <option value={11}>Other example</option>
+                                            <option value={1}>Temporarily uncategorized</option>
                                         </FormControl>
                                     </FormGroup>
                                 </Row>
