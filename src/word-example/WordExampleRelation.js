@@ -19,25 +19,44 @@ class Example extends Component {
             example_desc: '',
             keywords: '',
             source: '',
-            relation: '',            
+            relation: '',  
+            wordlist: [],          
         }
         this.handleClickOnWord = this.handleClickOnWord.bind(this);
         this.handleExampleChange = this.handleExampleChange.bind(this);
         this.handleRelationChange = this.handleRelationChange.bind(this);
         this.handleSubmitExample = this.handleSubmitExample.bind(this);
         this.handleWordExampleRelation = this.handleWordExampleRelation.bind(this);
+        this.handleKeyword = this.handleKeyword.bind(this);
+    }
+
+    handleKeyword(e){
+        this.setState({keywords:e.target.value});
     }
 
     handleExampleChange(e) {
-
+        this.setState({example_desc:e.target.value});
     }
 
     handleRelationChange(e) {
-
+        this.setState({relation:e.target.value});
     }
 
     handleSubmitExample(e) {
-
+        const exampleData = new FormData();
+        exampleData.append('example_desc',this.state.example_desc);
+        exampleData.append('keywords',this.state.keywords);
+        exampleData.append('source',this.state.source);
+        exampleData.append('relation',this.state.relation);
+        axios({
+            method:'POST',
+            url:'http://127.0.0.1:8000/pvoexample/api/v1/example',
+            data: exampleData
+        }).then(res=>{
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     handleClickOnWord(e) {
@@ -70,10 +89,17 @@ class Example extends Component {
                     <Row bsClass="col-centered">
                         <Col xs={4} md={4} lg={4} >
                             <FormGroup controlId="formControlsTextarea">
-                                <FormControl componentClass="textarea" placeholder="Enter examples here" rows={12} />
+                                <FormControl 
+                                    componentClass="textarea" 
+                                    placeholder="Enter examples here" 
+                                    rows={12}
+                                    onChange={this.handleExampleChange} />
                             </FormGroup>
                             <FormGroup>
-                                <FormControl></FormControl>
+                                <FormControl 
+                                    type="text" 
+                                    placeholder='keyword'
+                                    onChange={this.handleKeyword}/>
                             </FormGroup>
                             <FormGroup>
 
