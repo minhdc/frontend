@@ -1,6 +1,5 @@
 import React , {Component} from 'react';
 import WordForm from 'word/WordForm';
-import WordList from 'word/WordList';
 import NavBar from 'general/NavBar';
 
 
@@ -16,8 +15,7 @@ class Word extends Component{
         return(
             <div>
             <NavBar/>
-            <WordForm></WordForm>
-            <WordList></WordList>
+            <WordForm></WordForm>            
             </div>
         );
     }
