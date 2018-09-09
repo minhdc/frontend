@@ -6,7 +6,7 @@ import { Button, FormGroup, FormControl, ButtonGroup } from 'react-bootstrap';
  * RelationSelector = RelationActionButton + RelationSelector
  */
 
-class RelationSelector extends React.Component {
+class WordRelationSelector extends React.Component {
 
     constructor(props) {
         super(props);
@@ -47,15 +47,18 @@ class RelationActionButton extends React.Component {
         return (
             <div id="relationActionButton">
                 <ButtonGroup>
-                    <Button
-                        block
-                        bsClass="info">Update</Button>
-                    <Button
-                        block
-                        bsClass="success">Set</Button>
-                    <Button
-                        block
-                        bsClass="danger">Delete</Button>
+                    <Button                        
+                        bsStyle="info"
+                        onClick={this.props.handleUpdateWordRelation}
+                        disabled={this.props.isUpdateButtonDisabled}>Update</Button>
+                    <Button                        
+                        bsStyle="success"
+                        onClick={this.props.handleSetWordRelation}
+                        disabled={this.props.isSetButtonDisabled}>Set</Button>
+                    <Button                        
+                        bsStyle="danger"
+                        onClick={this.props.handleDeleteWordRelation}
+                        disabled={this.props.isDeleteButtonDisabled}>Delete</Button>
                 </ButtonGroup>
             </div>
         );
@@ -64,4 +67,4 @@ class RelationActionButton extends React.Component {
 
 
 
-export { RelationActionButton, RelationSelector };
+export { RelationActionButton, WordRelationSelector };

@@ -14,7 +14,7 @@ class WordItem extends React.Component{
                     onClick={this.props.handleClickOnWord}
                     active={this.props.isActive}
                     value={this.props.wordId}>
-                    {this.props.word}
+                    {this.props.wordId}. {this.props.word}
                 </ListGroupItem>
             </div>
         );

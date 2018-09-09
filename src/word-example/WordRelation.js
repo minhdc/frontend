@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 
 import WordList from '../word/WordList';
-import { RelationActionButton, RelationSelector } from "./RelationSelector";
+import { RelationActionButton, WordRelationSelector } from "./WordRelationSelector";
 
 
 class WordRelation extends Component {
@@ -42,7 +42,7 @@ class WordRelation extends Component {
                             </Row>
                         </Col>
                         <Col xs={4} md={4} lg={4}>
-                            <RelationSelector
+                            <WordRelationSelector
                                 relationValue={this.props.relationValue}
                                 handleWordRelationChange={this.props.handleWordRelationChange}
                             />
@@ -80,12 +80,13 @@ class WordRelation extends Component {
 
                         <Col xs={4} md={4} lg={4} >
                             <Row>
-                                <RelationActionButton
-                                    wordRelationAction={this.props.wordRelationAction}
+                                <RelationActionButton                                    
                                     handleSetWordRelation={this.props.handleSetWordRelation}
                                     handleUpdateWordRelation={this.props.handleUpdateWordRelation}
-                                    isSetButtonActive = {this.props.isSetButtonActive}
-                                    isUpdateButtonActive = {this.props.isUpdateButtonActive}
+                                    handleDeleteWordRelation={this.props.handleDeleteWordRelation}
+                                    isSetButtonDisabled= {this.props.isSetButtonDisabled}
+                                    isUpdateButtonDisabled = {this.props.isUpdateButtonDisabled}
+                                    isDeleteButtonDisabled = {this.props.isDeleteButtonDisabled}
                                 />
                             </Row>
                         </Col>
@@ -110,126 +111,7 @@ class WordRelation extends Component {
                 </Grid>
             </div>
         );
-    }
-    /*
-        render() {
-            return (
-                <div>
-                    <div id="wordRelation">
-                        <Grid>
-                            <Row bsClass="col-centered">
-                                <Col xs={4} md={4} lg={4}>
-                                    <Label bsStyle="success">Child Concept</Label>
-                                </Col>
-                                <Col xs={4} md={4} lg={4}>
-                                    <Label> Concept - Concept Relation</Label>
-                                </Col>
-                                <Col xs={4} md={4} lg={4}>
-                                    <Label bsStyle="danger">Parent Concept</Label>
-                                </Col>
-                            </Row>
-                            <Row bsClass="col-centered">
-                                <Col xs={4} md={4} lg={4}>
-                                    <div id="childConcept">
-    
-                                    </div>
-                                </Col>
-                                <Col xs={4} md={4} lg={4}>
-                                </Col>
-                                <Col xs={4} md={4} lg={4}>
-                                    <div id="parentConcept">
-    
-                                    </div>
-                                </Col>
-                            </Row>
-    
-                            <Row bsClass="col-centered">
-                                <Col xs={4} md={4} lg={4} >
-                                    <ListGroup bsClass="custom-listgroup">
-                                        {this.props.wordlist.map(word => (
-                                            <div key={word.id}>
-                                                <ListGroupItem
-                                                    onClick={(e, isParent) => this.handleClickOnWord(e, isParent = false)}
-                                                    value={word.id}
-                                                    active={this.state.child_concept_active}>
-                                                    {word.word}
-                                                </ListGroupItem>
-                                            </div>
-                                        ))}
-                                    </ListGroup>
-                                </Col>
-    
-                                <Col xs={4} md={4} lg={4} >
-                                    <Row>
-                                        <FormGroup
-                                            controlId="wordRelationControlSelect"
-                                            id="wordRelationControlSelect">
-                                            <FormControl componentClass="select"
-                                                placeholder="choose a relationship"
-                                                value={this.state.word_relation}
-                                                onChange={this.handleWordRelationChange}
-                                            >
-                                                <option value='6'>Undefined</option>
-                                                <option value='1'>General Association</option>
-                                                <option value='2'>Of the same concept cluster</option>
-                                                <option value='3'>A part of</option>
-                                                <option value='4'>A type of</option>
-                                                <option value='5'>Describing</option>
-                                            </FormControl>
-                                        </FormGroup>
-                                    </Row>
-                                </Col>
-    
-                                <Col xs={4} md={4} lg={4} >
-                                    <ListGroup bsClass="custom-listgroup">
-                                        {this.props.wordlist.map(word => (
-                                            <div key={word.id}>
-                                                <ListGroupItem
-                                                    onClick={(e, isParent) => this.handleClickOnWord(e, isParent = true)}
-                                                    value={word.id}>
-                                                    {word.word}
-                                                </ListGroupItem>
-                                            </div>
-                                        ))}
-                                    </ListGroup>
-                                </Col>
-                            </Row>
-                            <Col xs={4} md={4} lg={4}></Col>
-                            <Col xs={4} md={4} lg={4}>
-                                <Row>
-                                    {this.state.word_relation_status ? (
-                                        <Button block type="button" bsStyle="success" onClick={this.handleWordRelation} >Set Word Relation</Button>
-                                    ) : (
-                                            <Button block type="button" bsStyle="info" onClick={this.handleUpdateWordRelation} >Update Word Relation</Button>
-                                        )}
-                                </Row>
-                            </Col>
-                            <Col xs={4} md={4} lg={4}></Col>
-                        </Grid>
-                    </div>
-                    <div id="successModal">
-                        <Modal
-                            {...this.props}
-                            show={this.state.showSuccessModal}                        
-                            onHide={this.hideSuccessModal}
-                        >
-                            <Modal.Dialog>
-                                <ModalHeader closeButton>
-                                    <ModalTitle>Set/Update Word Relation </ModalTitle>
-                                </ModalHeader>
-    
-                                <ModalBody>Success!</ModalBody>
-    
-                                <ModalFooter>
-                                    <Button bsClass="danger">Close</Button>
-                                </ModalFooter>
-                            </Modal.Dialog>
-                        </Modal>
-                    </div>
-                </div>
-            );
-        }
-        */
+    }  
 }
 
 export default WordRelation;
