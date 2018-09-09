@@ -18,13 +18,11 @@ class WordRelation extends Component {
     }
 
     handleClickOnChild(e){
-        this.props.clickOnChild(e.target.value);
-        console.log("wordrelation class : child clicked"+e.target.value);
+        this.props.clickOnChild(e.target.value);        
     }
 
     handleClickOnParent(e){
-        this.props.clickOnParent(e.target.value);
-        console.log("wordrelation class : parent clicked"+e.target.value);
+        this.props.clickOnParent(e.target.value);        
     }
 
     render() {
@@ -86,6 +84,8 @@ class WordRelation extends Component {
                                     wordRelationAction={this.props.wordRelationAction}
                                     handleSetWordRelation={this.props.handleSetWordRelation}
                                     handleUpdateWordRelation={this.props.handleUpdateWordRelation}
+                                    isSetButtonActive = {this.props.isSetButtonActive}
+                                    isUpdateButtonActive = {this.props.isUpdateButtonActive}
                                 />
                             </Row>
                         </Col>

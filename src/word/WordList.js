@@ -6,16 +6,7 @@ import WordItem from './WordItem';
 import './words.css';
 class WordList extends Component {
     constructor(props) {
-        super(props);
-        this.setActiveElement = this.setActiveElement.bind(this);
-    }
-
-    setActiveElement(id) {
-
-    }
-
-    componentDidMount() {
-        console.log("wordlis: " + this.props.wordList);
+        super(props);        
     }
 
     render() {

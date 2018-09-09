@@ -4,6 +4,7 @@ import axios from 'axios';
 import NavBar from '../general/NavBar';
 import WordRelation from './WordRelation';
 import WordExampleRelation from './WordExampleRelation';
+import { resolve } from 'path';
 
 
 
@@ -17,14 +18,14 @@ class WordExampleWrapper extends Component {
         this.state = {
             wordList: [],
             relationValue: '',
-            selectedChildId: 'selected-child-appears-here',
-            selectedParentId: 'selected-parent-appears-here',
-
+            selectedChildId: '',
+            selectedParentId: '',
+            selectedChild: 'Select child concept from list below',
+            selectedParent: 'Select Parent concept from list below',
         };
         this.getWordList = this.getWordList.bind(this);
         this.handleClickOnChild = this.handleClickOnChild.bind(this);
         this.handleClickOnParent = this.handleClickOnParent.bind(this);
-        this.getWord = this.getWord.bind(this);
         this.checkCurrentRelationValue = this.checkCurrentRelationValue.bind(this);
     }
 
@@ -38,48 +39,62 @@ class WordExampleWrapper extends Component {
             })
     }
 
+
     handleClickOnChild(value) {
+        let selectedChildWord = '';
         this.setState({
             selectedChildId: value
-        },() => {
-            this.checkCurrentRelationValue(this.state.selectedParentId,
-                this.state.selectedChildId);
-        })        
-        
-        return this.getWord(value);
+        }, () => {
+            if (this.state.selectedChildId && this.state.selectedParentId) {
+                this.checkCurrentRelationValue(this.state.selectedParentId,
+                    this.state.selectedChildId);
+            }
+            axios.get('http://127.0.0.1:8000/pvoexample/api/v1/words/' + value)
+                .then(res => {
+                    this.setState({
+                        selectedChild: res.data.word, //need to solve later
+                    })
+                }).catch(e => {
+                    console.log(e);
+                })
+        })
+
+        return selectedChildWord;
     }
 
     handleClickOnParent(value) {
+        let selectedParentWord = '';
         this.setState({
             selectedParentId: value
-        },() => {
-            this.checkCurrentRelationValue(this.state.selectedParentId,
-                this.state.selectedChildId);
+        }, () => {
+            if (this.state.selectedChildId && this.state.selectedParentId) {
+                this.checkCurrentRelationValue(this.state.selectedParentId,
+                    this.state.selectedChildId);
+            }
+            axios.get('http://127.0.0.1:8000/pvoexample/api/v1/words/' + value)
+                .then(res => {
+                    this.setState({
+                        selectedParent: res.data.word, //need to fix later
+                    })
+                }).catch(e => {
+                    console.log(e);
+                })
+
         })
-        this.checkCurrentRelationValue(this.state.selectedParentId,this.state.selectedChildId);
-        return this.getWord(value);
+        return selectedParentWord
     }
 
-    getWord(value) {
-        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/words/' + value;
-        axios.get(uri)
-            .then(res => {
-                return res.data.word;
-            }).catch(e => {
-                console.log(e);
-                return '';
-            })
-        
-    }
+
 
     checkCurrentRelationValue(child, parent) {
-        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/wordrelationdetail/'+parent+'/'+child;
+        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/wordrelationdetail/' + parent + '/' + child;
         axios.get(uri)
             .then(res => {
-                console.log(res.data.relation);
-                this.setState({relationValue:res.data.relation});
+                this.setState({ relationValue: res.data.relation });
             }).catch(e => {
-                console.log(e);                
+                //console.log(e);
+                console.log('relation of ' + child + ' and ' + parent + " doesn't exist");
+                this.setState({ relationValue: '' });
             })
     }
 
@@ -87,7 +102,7 @@ class WordExampleWrapper extends Component {
         this.getWordList();
     }
 
-    
+
 
     render() {
         return (
@@ -98,8 +113,13 @@ class WordExampleWrapper extends Component {
                     relationValue={this.state.relationValue}
                     clickOnChild={this.handleClickOnChild}
                     clickOnParent={this.handleClickOnParent}
-                    selectedChild={() => this.handleClickOnChild}
-                    selectedParent={() => this.handleClickOnParent}
+                    selectedChild={this.state.selectedChild}
+                    selectedParent={this.state.selectedParent}
+                    wordRelationAction={(this.state.relationValue != '') ? true : false}
+                    isSetButtonActive={(this.state.selectedParentId != '' &&
+                        this.state.selectedChildId != '') ? true : false}
+                    isUpdateButtonActive={(this.state.selectedParentId != ''&&
+                        this.state.selectedChildId != '') ? true : false}
                 />
                 <WordExampleRelation />
             </div >

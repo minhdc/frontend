@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, ButtonGroup } from 'react-bootstrap';
 
 
 /**
@@ -46,21 +46,17 @@ class RelationActionButton extends React.Component {
     render() {
         return (
             <div id="relationActionButton">
-                {this.props.wordRelationAction ? (
+                <ButtonGroup>
                     <Button
                         block
-                        type="button"
-                        bsStyle="primary"
-                        onClick={this.props.handleSetWordRelation}>
-                        Set WordRelation</Button>
-                ) : (
-                        <Button
-                            block
-                            type="button"
-                            bsStyle="info"
-                            onClick={this.props.handleUpdateWordRelation}>
-                            Update WordRelation</Button>
-                    )}
+                        bsClass="info">Update</Button>
+                    <Button
+                        block
+                        bsClass="success">Set</Button>
+                    <Button
+                        block
+                        bsClass="danger">Delete</Button>
+                </ButtonGroup>
             </div>
         );
     }
