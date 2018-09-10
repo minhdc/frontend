@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 
 import {
     Grid, Row, Col, Button,Label
 } from 'react-bootstrap';
 
-import WordList from '../word/WordList';
-import { RelationActionButton, WordRelationSelector } from "./WordRelationSelector";
+import ConceptList from '../concept/ConceptList';
+import { RelationActionButton, ConceptRelationSelector } from "./ConceptRelationSelector";
 
 
-class WordRelation extends Component {
+class ConceptRelation extends Component {
 
     constructor(props) {
         super(props);
@@ -42,7 +41,7 @@ class WordRelation extends Component {
                             </Row>
                         </Col>
                         <Col xs={4} md={4} lg={4}>
-                            <WordRelationSelector
+                            <ConceptRelationSelector
                                 relationValue={this.props.relationValue}
                                 handleWordRelationChange={this.props.handleWordRelationChange}
                             />
@@ -63,7 +62,7 @@ class WordRelation extends Component {
                     <Row id="secondRow">
                         <Col xs={4} md={4} lg={4} >
                             <Row>
-                                <WordList
+                                <ConceptList
                                     wordList={this.props.wordList}
                                     isParent={false}
                                     handleClickOnWord={this.handleClickOnChild}
@@ -93,7 +92,7 @@ class WordRelation extends Component {
 
                         <Col xs={4} md={4} lg={4} >
                             <Row>
-                                <WordList
+                                <ConceptList
                                     wordList={this.props.wordList}
                                     isParent={true}
                                     handleClickOnWord={this.handleClickOnParent}
@@ -114,4 +113,4 @@ class WordRelation extends Component {
     }  
 }
 
-export default WordRelation;
+export default ConceptRelation;

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, ButtonGroup } from 'react-bootstrap';
+import { Button, FormGroup, 
+    FormControl, ButtonGroup } from 'react-bootstrap';
 
 
 /**
  * RelationSelector = RelationActionButton + RelationSelector
  */
 
-class WordRelationSelector extends React.Component {
+class ConceptRelationSelector extends React.Component {
 
     constructor(props) {
         super(props);
@@ -67,4 +68,4 @@ class RelationActionButton extends React.Component {
 
 
 
-export { RelationActionButton, WordRelationSelector };
+export { RelationActionButton, ConceptRelationSelector };

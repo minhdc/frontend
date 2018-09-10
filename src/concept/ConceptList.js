@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import WordItem from './WordItem';
+import ConceptItem from './ConceptItem';
 
-import './words.css';
-class WordList extends Component {
+import './concept.css';
+class ConceptList extends Component {
     constructor(props) {
         super(props);        
     }
@@ -15,7 +15,7 @@ class WordList extends Component {
                 <ListGroup bsClass="custom-listgroup">
                     {this.props.wordList.map(word => (
                         <div key={word.id}>
-                            <WordItem
+                            <ConceptItem
                                 wordId={word.id}
                                 handleClickOnWord={this.props.handleClickOnWord}
                                 isActive={false}
@@ -29,4 +29,4 @@ class WordList extends Component {
     }
 }
 
-export default WordList;
+export default ConceptList;

@@ -2,16 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import NavBar from '../general/NavBar';
-import WordRelation from './WordRelation';
-import WordExampleRelation from './WordExampleRelation';
-import { resolve } from 'path';
-
-
-
+import ConceptRelation from './ConceptRelation';
+import ConceptExampleRelation from './ConceptExampleRelation';
 /**
  * WordExampleWrapper = WordRelation + WordExampleRelation
  */
-class WordExampleWrapper extends Component {
+class ConceptExampleWrapper extends Component {
 
     constructor(props) {
         super(props);
@@ -23,6 +19,9 @@ class WordExampleWrapper extends Component {
             selectedParentId: '',
             selectedChild: 'Select child concept from list below',
             selectedParent: 'Select Parent concept from list below',
+
+            selectedConcept: '',
+            selectedConceptId: '',
         };
         this.getWordList = this.getWordList.bind(this);
         this.handleClickOnChild = this.handleClickOnChild.bind(this);
@@ -121,7 +120,7 @@ class WordExampleWrapper extends Component {
                 }
                 );
             }).catch(e => {
-                console.log('relation of ' + child + ' and ' + parent + " doesn't exist");
+                console.log('relation of ' + parent + ' and ' + child + " doesn't exist");
                 this.setState({
                     relationValue: '',
                     relationExist: false,
@@ -133,8 +132,8 @@ class WordExampleWrapper extends Component {
     handleSetWordRelation = () => {
         const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/wordrelation';
         const wordRelation = new FormData();
-        wordRelation.append('word1_id', this.state.selectedParentId);
-        wordRelation.append('word2_id', this.state.selectedChildId);
+        wordRelation.append('parent_id', this.state.selectedParentId);
+        wordRelation.append('child_id', this.state.selectedChildId);
         wordRelation.append('relation', this.state.relationValue);
         axios({
             method: "POST",
@@ -152,8 +151,8 @@ class WordExampleWrapper extends Component {
         const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/wordrelationdetail/' +
             this.state.selectedParentId + '/' + this.state.selectedChildId;
         const wordRelation = new FormData();
-        wordRelation.append('word1_id', this.state.selectedParentId);
-        wordRelation.append('word2_id', this.state.selectedChildId);
+        wordRelation.append('parent_id', this.state.selectedParentId);
+        wordRelation.append('child_id', this.state.selectedChildId);
         //wordRelation.append('relation', '6');
         axios({
             method: "DELETE",
@@ -171,8 +170,8 @@ class WordExampleWrapper extends Component {
         const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/wordrelationdetail/' +
             this.state.selectedParentId + '/' + this.state.selectedChildId;
         const wordRelation = new FormData();
-        wordRelation.append('word1_id', this.state.selectedParentId);
-        wordRelation.append('word2_id', this.state.selectedChildId);
+        wordRelation.append('parent_id', this.state.selectedParentId);
+        wordRelation.append('child_id', this.state.selectedChildId);
         wordRelation.append('relation', this.state.relationValue);
         axios({
             method: "PUT",
@@ -186,6 +185,21 @@ class WordExampleWrapper extends Component {
         })
     }
 
+// Example - Concept:
+    handleClickOnConcept = (value) => {
+        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/words/'+value;
+        console.log('concept id = ' + value);
+        axios({
+            method: 'GET',
+            uri: uri,            
+        }).then(res => {
+            this.setState({
+                selectedConceptId: value,
+                selectedConcept: res.data.word
+            })
+        })
+    }
+
     componentDidMount() {
         this.getWordList();
     }
@@ -196,7 +210,7 @@ class WordExampleWrapper extends Component {
         return (
             <div>
                 <NavBar />
-                <WordRelation
+                <ConceptRelation
                     wordList={this.state.wordList}
                     relationValue={this.state.relationValue}
                     handleWordRelationChange={this.handleWordRelationChange}
@@ -217,10 +231,12 @@ class WordExampleWrapper extends Component {
                     handleSetWordRelation={this.handleSetWordRelation}
                     handleDeleteWordRelation={this.handleDeleteWordRelation}
                 />
-                <WordExampleRelation />
+                <ConceptExampleRelation
+                    wordList={this.state.wordList} 
+                    clickOnConcept = {this.handleClickOnConcept}/>                
             </div >
         );
     }
 }
 
-export default WordExampleWrapper;
+export default ConceptExampleWrapper;

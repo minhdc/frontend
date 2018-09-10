@@ -1,9 +1,9 @@
 import React , {Component} from 'react';
-import WordForm from 'word/WordForm';
+import ConceptForm from 'concept/ConceptForm';
 import NavBar from 'general/NavBar';
 
 
-class Word extends Component{
+class Concept extends Component{
     constructor(props){
         super(props);
         
@@ -15,11 +15,11 @@ class Word extends Component{
         return(
             <div>
             <NavBar/>
-            <WordForm></WordForm>            
+            <ConceptForm></ConceptForm>            
             </div>
         );
     }
 
 }
 
-export default Word;
+export default Concept;

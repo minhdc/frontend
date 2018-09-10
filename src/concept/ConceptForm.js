@@ -6,7 +6,7 @@ import {
 } from 'react-bootstrap';
 
 
-class WordForm extends Component {
+class ConceptForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -141,4 +141,4 @@ class WordForm extends Component {
     }
 }
 
-export default WordForm;
+export default ConceptForm;

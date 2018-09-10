@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {ListGroupItem } from 'react-bootstrap';
 
-class WordItem extends React.Component{
+class ConceptItem extends React.Component{
     constructor(props){
         super(props);
     }
@@ -21,4 +21,4 @@ class WordItem extends React.Component{
     }
 }
 
-export default WordItem;
+export default ConceptItem;
