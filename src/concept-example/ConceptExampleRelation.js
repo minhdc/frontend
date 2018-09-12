@@ -5,7 +5,10 @@ import {
     FormControl, ListGroup, ListGroupItem
 } from 'react-bootstrap';
 
-import { ConceptExampleRelationSelector } from './ConceptExampleRelationSelector';
+import {
+    ConceptExampleRelationSelector,
+    WordExampleRelationActionButton
+} from './ConceptExampleRelationSelector';
 import Example from '../example/Example.js';
 import ConceptList from '../concept/ConceptList.js';
 
@@ -13,27 +16,53 @@ import ConceptList from '../concept/ConceptList.js';
 class ConceptExampleRelation extends Component {
 
     constructor(props) {
-        super(props);        
-    }    
+        super(prop  );
+    }
 
     handleClickOnWord = (e) => {
         this.props.clickOnConcept(e.target.value);
     }
 
-    componentDidMount(){
-       
+    componentDidMount() {
+
     }
 
     render() {
         return (
-            <div>                
-                <Example/>
-                <ConceptExampleRelationSelector
-                    wordExampleRelationValue = {this.props.wordExampleRelationValue}
-                    handleWordExampleRelationChange = {this.props.handleWordExampleRelationChange}/>
-                <ConceptList
-                    wordList={this.props.wordList}
-                    handleClickOnWord={this.handleClickOnWord}/>
+            <div id="conceptExampleRelation">
+                <Grid>
+                    <Row id="firstRow">
+                        <Col xs={4} md={4} lg={4}>
+                            <Row>
+                                <Example />
+                            </Row>
+                        </Col>
+                        <Col xs={4} md={4} lg={4}>
+                            <Row>
+                                <ConceptExampleRelationSelector
+                                    wordExampleRelationValue={this.props.wordExampleRelationValue}
+                                    handleWordExampleRelationChange={this.props.handleWordExampleRelationChange} />
+                            </Row>
+                            <Row>
+                                <WordExampleRelationActionButton />
+                            </Row>
+                        </Col>
+                        <Col xs={4} md={4} lg={4}>
+                            <Row>
+                                <Button
+                                    block
+                                    bsStyle="danger">
+                                    {this.props.selectedConcept}
+                                </Button>
+                            </Row>
+                            <Row>
+                                <ConceptList
+                                    wordList={this.props.wordList}
+                                    handleClickOnWord={this.handleClickOnWord} />
+                            </Row>
+                        </Col>
+                    </Row>
+                </Grid>
             </div>
         );
     }

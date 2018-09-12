@@ -20,7 +20,7 @@ class ConceptExampleWrapper extends Component {
             selectedChild: 'Select child concept from list below',
             selectedParent: 'Select Parent concept from list below',
 
-            selectedConcept: '',
+            selectedConcept: 'Select Concept from list below',
             selectedConceptId: '',
         };
         this.getWordList = this.getWordList.bind(this);
@@ -185,19 +185,17 @@ class ConceptExampleWrapper extends Component {
         })
     }
 
-// Example - Concept:
+    // Example - Concept://///////////////////////////////////////////////
     handleClickOnConcept = (value) => {
-        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/words/'+value;
+        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/words/' + value;
         console.log('concept id = ' + value);
-        axios({
-            method: 'GET',
-            uri: uri,            
-        }).then(res => {
-            this.setState({
-                selectedConceptId: value,
-                selectedConcept: res.data.word
+        axios.get(uri)
+            .then(res => {
+                this.setState({
+                    selectedConceptId: value,
+                    selectedConcept: res.data.word
+                })
             })
-        })
     }
 
     componentDidMount() {
@@ -210,7 +208,18 @@ class ConceptExampleWrapper extends Component {
         return (
             <div>
                 <NavBar />
-                <ConceptRelation
+
+                <ConceptExampleRelation
+                    wordList={this.state.wordList}
+                    clickOnConcept={this.handleClickOnConcept}
+                    selectedConcept={this.state.selectedConcept} />
+            </div >
+        );
+    }
+}
+
+/**
+ <ConceptRelation
                     wordList={this.state.wordList}
                     relationValue={this.state.relationValue}
                     handleWordRelationChange={this.handleWordRelationChange}
@@ -231,12 +240,6 @@ class ConceptExampleWrapper extends Component {
                     handleSetWordRelation={this.handleSetWordRelation}
                     handleDeleteWordRelation={this.handleDeleteWordRelation}
                 />
-                <ConceptExampleRelation
-                    wordList={this.state.wordList} 
-                    clickOnConcept = {this.handleClickOnConcept}/>                
-            </div >
-        );
-    }
-}
+ */
 
 export default ConceptExampleWrapper;
