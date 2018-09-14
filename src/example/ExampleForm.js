@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
-class Example extends Component {
+class ExampleForm extends Component {
     handleInputChange = (e) => {        
         this.props.onChange(e.target.id,e.target.value);        
     }
@@ -51,4 +51,4 @@ class Example extends Component {
     }
 }
 
-export default Example;
+export default ExampleForm;

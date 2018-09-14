@@ -7,7 +7,7 @@ import {
     ConceptExampleRelationSelector,
     ConceptExampleRelationActionButton
 } from './ConceptExampleRelationSelector';
-import Example from '../example/Example.js';
+import ExampleForm from '../example/ExampleForm.js';
 import ConceptList from '../concept/ConceptList.js';
 
 
@@ -36,7 +36,7 @@ class ConceptExampleRelation extends Component {
                     <Row id="firstRow">
                         <Col xs={4} md={4} lg={4}>
                             <Row>
-                                <Example 
+                                <ExampleForm 
                                     onChange = {this.handleInputChange}
                                     exampleDesc = {this.props.exampleDesc}
                                     keywords = {this.props.keywords}
