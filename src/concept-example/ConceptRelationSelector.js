@@ -7,11 +7,7 @@ import { Button, FormGroup,
  * RelationSelector = RelationActionButton + RelationSelector
  */
 
-class ConceptRelationSelector extends React.Component {
-
-    constructor(props) {
-        super(props);
-    }
+class ConceptRelationSelector extends Component {
 
     render() {
         return (

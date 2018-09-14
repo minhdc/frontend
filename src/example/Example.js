@@ -2,32 +2,47 @@ import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 class Example extends Component {
-    constructor(props) {
-        super(props);
+    handleInputChange = (e) => {        
+        this.props.onChange(e.target.id,e.target.value);        
     }
 
+
     render() {
+        const bindInput = propPath => ({
+            value: this.props[propPath],
+            onChange: (e) => {
+                propPath = e.target.value
+            }
+        });
+
         return (
             <div>
                 <form>
-                    <FormGroup controlId="formControlExampleDescription">
-                        <ControlLabel>Example Description</ControlLabel>
+                    <FormGroup controlId="exampleDesc">
+                        <ControlLabel >Example Description</ControlLabel>
                         <FormControl
                             componentClass="textarea"
                             placeholder="describe your example(s) here"
-                            style={{height:160}}>
+                            onChange={this.handleInputChange}
+                            value={this.props.exampleDesc}
+                            style={{ height: 160 }}>
                         </FormControl>
                     </FormGroup>
-                    <FormGroup controlId="formControlKeyWord">
+                    <FormGroup controlId="keywords">
                         <ControlLabel>Keywords</ControlLabel>
-                        <FormControl                            
+                        <FormControl
                             type="text"
-                            placeholder="key1, key2, key3, ..."></FormControl>
+                            onChange={this.handleInputChange}
+                            value={this.props.keywords}
+                            placeholder="key1, key2, key3, ..."
+                            label="keyword"></FormControl>
                     </FormGroup>
-                    <FormGroup controlId="formControlSource">
+                    <FormGroup controlId="source">
                         <ControlLabel>Source</ControlLabel>
-                        <FormControl                            
-                            type="text"
+                        <FormControl
+                            onChange={this.handleInputChange}
+                            value={this.props.source}
+                            label="source"
                         ></FormControl>
                     </FormGroup>
                 </form>

@@ -117,26 +117,7 @@ class ConceptForm extends Component {
                         </Modal.Body>
                     </Modal>
                 </div>
-            </div>
-
-            /*          
-            <form>
-                
-                <label htmlFor="">
-                    Word:
-                    <input name="word" type="text" value={this.state.word} onInput = {this.handleInput} />
-                </label>
-                <label htmlFor="">
-                    Definition:
-                    <input name="definition" type="text" value={this.state.definition} onInput = {this.handleInput} />
-                </label>
-                <label htmlFor="">
-                    IMG:
-                    <input name="img" type="file" ref={this.fileInput} />
-                </label>
-                <button type="button" value="Submit" onClick={this.handleSubmit}>Submit</button>
-            </form>
-            */
+            </div>            
         );
     }
 }

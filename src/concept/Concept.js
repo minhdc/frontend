@@ -4,12 +4,7 @@ import NavBar from 'general/NavBar';
 
 
 class Concept extends Component{
-    constructor(props){
-        super(props);
-        
-    }
-
-    
+   
 
     render(){
         return(

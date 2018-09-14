@@ -8,19 +8,13 @@ import ConceptList from '../concept/ConceptList';
 import { RelationActionButton, ConceptRelationSelector } from "./ConceptRelationSelector";
 
 
-class ConceptRelation extends Component {
+class ConceptRelation extends Component {   
 
-    constructor(props) {
-        super(props);
-        this.handleClickOnChild = this.handleClickOnChild.bind(this);
-        this.handleClickOnParent = this.handleClickOnParent.bind(this);
-    }
-
-    handleClickOnChild(e){
+    handleClickOnChild = (e) => {
         this.props.clickOnChild(e.target.value);        
     }
 
-    handleClickOnParent(e){
+    handleClickOnParent = (e) => {
         this.props.clickOnParent(e.target.value);        
     }
 
@@ -43,7 +37,7 @@ class ConceptRelation extends Component {
                         <Col xs={4} md={4} lg={4}>
                             <ConceptRelationSelector
                                 relationValue={this.props.relationValue}
-                                handleWordRelationChange={this.props.handleWordRelationChange}
+                                handleWordRelationChange={this.props.handleWordRelationChange}                                
                             />
                         </Col>
                         <Col xs={4} md={4} lg={4} >

@@ -22,6 +22,11 @@ class ConceptExampleWrapper extends Component {
 
             selectedConcept: 'Select Concept from list below',
             selectedConceptId: '',
+            exampleId:'',
+            exampleDesc:'',
+            keywords: '',
+            source: '',
+            conceptExampleRelationId:'',
         };
         this.getWordList = this.getWordList.bind(this);
         this.handleClickOnChild = this.handleClickOnChild.bind(this);
@@ -60,6 +65,18 @@ class ConceptExampleWrapper extends Component {
             selectedParentId: '',
             selectedChild: 'Select child concept from list below',
             selectedParent: 'Select Parent concept from list below',
+        })
+    }
+
+    resetConceptExampleRelationState = () => {
+        this.setState({
+            selectedConcept: 'Select Concept from list below',
+            selectedConceptId: '',
+            exampleId:'',
+            exampleDesc:'',
+            keywords: '',
+            source: '',
+            conceptExampleRelationId:'',
         })
     }
 
@@ -142,6 +159,7 @@ class ConceptExampleWrapper extends Component {
         }).then((res) => {
             console.log(res);
             this.resetWordRelationState();
+            //show success modal here
         }).catch(err => {
             console.log(err);
         })
@@ -161,6 +179,7 @@ class ConceptExampleWrapper extends Component {
         }).then((res) => {
             console.log(res);
             this.resetWordRelationState();
+            //show success modal here
         }).catch(err => {
             console.log(err);
         })
@@ -180,6 +199,7 @@ class ConceptExampleWrapper extends Component {
         }).then((res) => {
             console.log(res);
             this.resetWordRelationState();
+            //show success modal here
         }).catch(err => {
             console.log(err);
         })
@@ -187,8 +207,7 @@ class ConceptExampleWrapper extends Component {
 
     // Example - Concept://///////////////////////////////////////////////
     handleClickOnConcept = (value) => {
-        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/words/' + value;
-        console.log('concept id = ' + value);
+        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/words/' + value;        
         axios.get(uri)
             .then(res => {
                 this.setState({
@@ -196,6 +215,57 @@ class ConceptExampleWrapper extends Component {
                     selectedConcept: res.data.word
                 })
             })
+    }
+
+    handleExampleInputChange = (id,text) => {        
+        this.setState({
+            [id]:text,
+        })
+    }
+
+    //need 2 refactor
+    handleSubmitExample = () =>{
+        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/example';
+        const example = new FormData();
+        example.append('example_desc',this.state.exampleDesc);
+        example.append('keywords',this.state.keywords);
+        example.append('source',this.state.source);
+
+        axios.post(uri,example).then(res => {            
+            console.log(res);
+            axios.get('http://127.0.0.1:8000/pvoexample/api/v1/example/latest')
+                .then(response => {
+                    this.setState({exampleId:response.data.id});
+                    this.handleSetWordExampleRelation();
+                    this.resetConceptExampleRelationState();
+                    //show success modal here
+                })
+            
+        }).catch(err => {
+            console.log(err);
+        })
+    }
+
+    handleSetWordExampleRelation = () => {        
+        const uri = 'http://127.0.0.1:8000/pvoexample/api/v1/wordexample';
+        let exampleConceptRelation = new FormData();
+        exampleConceptRelation.append('word_id',this.state.selectedConceptId);
+        exampleConceptRelation.append('example_id',this.state.exampleId);
+        exampleConceptRelation.append('relation_id',this.state.conceptExampleRelationId);
+
+        axios.post(uri,exampleConceptRelation)
+        .then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+
+    }
+
+    handleConceptExampleRelationChange = (e) => {
+        this.setState({
+            conceptExampleRelationId: e.target.value
+        })
     }
 
     componentDidMount() {
@@ -212,7 +282,21 @@ class ConceptExampleWrapper extends Component {
                 <ConceptExampleRelation
                     wordList={this.state.wordList}
                     clickOnConcept={this.handleClickOnConcept}
-                    selectedConcept={this.state.selectedConcept} />
+                    selectedConcept={this.state.selectedConcept} 
+                    handleExampleInputChange = {this.handleExampleInputChange}
+
+                    exampleDesc = {this.state.exampleDesc}
+                    keywords = {this.state.keywords}
+                    source = {this.state.source}
+
+                    handleSubmitWordExampleRelation = {this.handleSubmitExample}
+                    isSetExampleConceptButtonDisabled = {(this.state.selectedConceptId === '')
+                        || (this.state.exampleDesc === '')}
+                    conceptExampleRelationValue = {this.state.conceptExampleRelationId}
+                    handleConceptExampleRelationChange = {this.handleConceptExampleRelationChange}
+
+                    />
+                    
             </div >
         );
     }
@@ -231,14 +315,16 @@ class ConceptExampleWrapper extends Component {
 
                     wordRelationAction={(this.state.relationValue != '') ? true : false}
                     isSetButtonDisabled={(this.state.relationExist || 
-                            (this.state.selectedChildId == '' || 
-                            this.state.selectedParentId == '')? true : false)}
+                            (this.state.selectedChildId === '' || 
+                            this.state.selectedParentId === '')? true : false)}
                     isUpdateButtonDisabled={(!this.state.relationExist ? true : false)}
                     isDeleteButtonDisabled={(!this.state.relationExist ? true : false)}
 
                     handleUpdateWordRelation={this.handleUpdateWordRelation}
                     handleSetWordRelation={this.handleSetWordRelation}
                     handleDeleteWordRelation={this.handleDeleteWordRelation}
+                   
+
                 />
  */
 

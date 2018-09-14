@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import {ListGroupItem } from 'react-bootstrap';
 
-class ConceptItem extends React.Component{
-    constructor(props){
-        super(props);
-    }
-
+class ConceptItem extends Component{
     render(){
         return(
             <div>

@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
-import { FormControl, FormGroup, Button, ButtonGroup } from 'react-bootstrap';
+import { FormControl, FormGroup, Button } from 'react-bootstrap';
 
 /**
  * WordExampleRelationSelector = RelationAction + WERelationSelector
  */
 
 class ConceptExampleRelationSelector extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
-            <div id="wordExampleRelationSelector">
+            <div id="conceptExampleRelationSelector">
                 <FormGroup
-                    controlId="wordExampleRelationSelectorControl"
-                    id="wordExampleRelationSelectorForm">
+                    controlId="conceptExampleRelationSelectorControl"
+                    id="conceptExampleRelationSelectorForm">
                     <FormControl componentClass="select"
                         placeholder="choose a relationship"
-                        value={this.props.wordExampleRelationValue}
-                        onChange={this.props.handleWordExampleRelationChange}>
+                        value={this.props.conceptExampleRelationValue}
+                        onChange={this.props.handleConceptExampleRelationChange}>
 
                         <option value='0'>Uncategorized</option>
                         <option value='1'>Same Concept & subconcept</option>
@@ -39,7 +35,7 @@ class ConceptExampleRelationSelector extends Component {
     }
 }
 
-class WordExampleRelationActionButton extends React.Component {
+class ConceptExampleRelationActionButton extends React.Component {
 
     constructor(props) {
         super(props);
@@ -52,11 +48,11 @@ class WordExampleRelationActionButton extends React.Component {
                         block
                         bsStyle="success"
                         onClick={this.props.handleSetWordExampleRelation}
-                        disabled={this.props.isSetButtonDisabled}>Set</Button>
+                        disabled={this.props.isSetExampleConceptButtonDisabled}>Set</Button>
                 
             </div>
         );
     }
 }
 
-export { WordExampleRelationActionButton, ConceptExampleRelationSelector };
+export { ConceptExampleRelationActionButton, ConceptExampleRelationSelector };

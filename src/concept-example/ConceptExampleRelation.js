@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import {
-    Grid, Row, Col, FormGroup,
-    Label, Button, ControlLabel,
-    FormControl, ListGroup, ListGroupItem
+    Grid, Row, Col, Button    
 } from 'react-bootstrap';
 
 import {
     ConceptExampleRelationSelector,
-    WordExampleRelationActionButton
+    ConceptExampleRelationActionButton
 } from './ConceptExampleRelationSelector';
 import Example from '../example/Example.js';
 import ConceptList from '../concept/ConceptList.js';
@@ -15,12 +13,16 @@ import ConceptList from '../concept/ConceptList.js';
 
 class ConceptExampleRelation extends Component {
 
-    constructor(props) {
-        super(prop  );
-    }
-
     handleClickOnWord = (e) => {
         this.props.clickOnConcept(e.target.value);
+    }
+
+    handleInputChange = (id,text) => {        
+        this.props.handleExampleInputChange(id,text);
+    }
+
+    handleSetWordExampleRelation = (e) => {
+        this.props.handleSubmitWordExampleRelation();        
     }
 
     componentDidMount() {
@@ -34,17 +36,23 @@ class ConceptExampleRelation extends Component {
                     <Row id="firstRow">
                         <Col xs={4} md={4} lg={4}>
                             <Row>
-                                <Example />
+                                <Example 
+                                    onChange = {this.handleInputChange}
+                                    exampleDesc = {this.props.exampleDesc}
+                                    keywords = {this.props.keywords}
+                                    source = {this.props.source}/>
                             </Row>
                         </Col>
                         <Col xs={4} md={4} lg={4}>
                             <Row>
                                 <ConceptExampleRelationSelector
-                                    wordExampleRelationValue={this.props.wordExampleRelationValue}
-                                    handleWordExampleRelationChange={this.props.handleWordExampleRelationChange} />
+                                    conceptExampleRelationValue={this.props.conceptExampleRelationValue}
+                                    handleConceptExampleRelationChange={this.props.handleConceptExampleRelationChange} />
                             </Row>
                             <Row>
-                                <WordExampleRelationActionButton />
+                                <ConceptExampleRelationActionButton
+                                    handleSetWordExampleRelation = {this.handleSetWordExampleRelation}
+                                    isSetExampleConceptButtonDisabled = {this.props.isSetExampleConceptButtonDisabled} />
                             </Row>
                         </Col>
                         <Col xs={4} md={4} lg={4}>
